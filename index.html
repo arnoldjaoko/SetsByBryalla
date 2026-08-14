@@ -106,53 +106,19 @@
 
   /* GALLERY */
   .gallery-intro { max-width: 500px; }
-  .owner-mode-btn {
-    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--text-muted); background: transparent;
-    border: 0.5px solid rgba(201,168,76,0.2); padding: 0.5rem 1rem;
-    cursor: pointer; font-family: 'Montserrat', sans-serif;
-    transition: all 0.3s; margin-bottom: 2rem; display: inline-block;
-  }
-  .owner-mode-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .owner-mode-btn.active { border-color: var(--gold); color: var(--black); background: var(--gold); }
-  .owner-mode-banner {
-    display: none; background: rgba(201,168,76,0.08); border: 0.5px solid rgba(201,168,76,0.5);
-    padding: 0.75rem 1.5rem; margin-bottom: 2rem;
-    font-size: 0.65rem; letter-spacing: 0.12em; color: var(--gold);
-  }
-  .owner-mode-banner button {
-    margin-left: 1rem; background: none; border: 0.5px solid var(--gold); color: var(--gold);
-    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 0.3rem 0.8rem; cursor: pointer; font-family: 'Montserrat', sans-serif;
-  }
-  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 2.5rem; }
   .gallery-item {
     position: relative; overflow: hidden; aspect-ratio: 1;
     background: var(--charcoal); border: 0.5px solid rgba(201,168,76,0.12); transition: border-color 0.3s;
   }
-  .gallery-item.owner-active { cursor: pointer; }
-  .gallery-item.owner-active:hover { border-color: var(--gold); }
   .gallery-placeholder {
     width: 100%; height: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 0.75rem;
     color: rgba(201,168,76,0.2); padding: 1rem;
   }
-  .gallery-placeholder-icon { font-size: 1.6rem; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .owner-overlay {
-    position: absolute; inset: 0; background: rgba(13,13,13,0.7);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;
-  }
-  .gallery-item.owner-active:hover .owner-overlay { opacity: 1; pointer-events: all; }
-  .owner-overlay-btn {
-    font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
-    border: none; padding: 0.45rem 1.1rem; cursor: pointer;
-    font-family: 'Montserrat', sans-serif; min-width: 90px; text-align: center;
-  }
-  .owner-overlay-btn.upload { background: var(--gold); color: var(--black); }
-  .owner-overlay-btn.remove { background: rgba(180,40,40,0.9); color: #fff; }
-  input[type="file"] { display: none; }
+  .gallery-embed { border: 0.5px solid rgba(201,168,76,0.2); background: var(--charcoal); }
+  .gallery-embed iframe { width: 100%; height: 650px; border: none; display: block; }
+  .gallery-embed-note { margin-top: 1.2rem; font-size: 0.65rem; color: var(--text-muted); line-height: 1.8; max-width: 600px; }
 
   /* FAQ */
   .faq-list { max-width: 760px; margin-top: 3rem; border-top: 0.5px solid rgba(201,168,76,0.2); }
@@ -210,15 +176,9 @@
   .footer-links button:hover { color: var(--gold); }
   .footer-copy { font-size: 0.6rem; color: rgba(122,106,80,0.5); letter-spacing: 0.1em; }
 
-  /* MODALS & TOAST */
+  /* TOAST */
   .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--charcoal); border: 0.5px solid var(--gold); padding: 1rem 1.5rem; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--cream); z-index: 999; transform: translateY(100px); opacity: 0; transition: all 0.4s ease; max-width: 300px; }
   .toast.show { transform: translateY(0); opacity: 1; }
-  .modal-backdrop { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
-  .modal-backdrop.open { display: flex; }
-  .modal-box { background: var(--charcoal); border: 0.5px solid rgba(201,168,76,0.4); padding: 2.5rem; width: 340px; text-align: center; }
-  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--cream); margin-bottom: 0.3rem; }
-  .modal-input { width: 100%; background: rgba(0,0,0,0.4); border: 0.5px solid rgba(201,168,76,0.3); color: var(--cream); padding: 0.8rem 1rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; outline: none; text-align: center; margin-bottom: 1rem; }
-  .modal-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 0.9rem; font-family: 'Montserrat', sans-serif; cursor: pointer; }
 
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
@@ -236,16 +196,6 @@
 </style>
 </head>
 <body>
-
-<div class="modal-backdrop" id="pwModal">
-  <div class="modal-box">
-    <p class="modal-title">Owner <em style="font-style:italic;color:var(--gold)">Access</em></p>
-    <p class="modal-input" style="border:none;font-size:0.6rem;text-transform:uppercase;color:var(--text-muted)">Enter password</p>
-    <input type="password" class="modal-input" id="pwInput" onkeydown="if(event.key==='Enter')checkPassword()">
-    <button class="modal-btn" onclick="checkPassword()">Enter Studio</button><br>
-    <button style="background:none;border:none;color:var(--text-muted);font-size:0.6rem;margin-top:1rem;cursor:pointer" onclick="closeModal()">Cancel</button>
-  </div>
-</div>
 
 <nav>
   <button class="nav-logo" onclick="goTo('home')"><em>SetsBy</em>Bryalla</button>
@@ -308,7 +258,8 @@
     <div class="schedule-layout">
       <div class="schedule-hours">
         <div class="schedule-header">Bi-Weekly Rotation Schedule</div>
-        <div class="schedule-day"><span class="day-name">Week 1 </span><span class="day-hours">8:00 AM – 8:00 PM</span></div>
+        <div class="schedule-day"><span class="day-name">Week 1 </span><span class="day-hours">S,M,T,TH,F,S: 8:00 AM – 8:00 PM</span></div>
+        <div class="schedule-day"><span class="day-name">Wed</span><span class="day-hours">3:00 PM – 8:00 PM</span></div>
         <div class="schedule-day"><span class="day-name">Week 2</span><span class="day-closed">Closed (Unavailable)</span></div>
         <div class="schedule-day" style="border:none;margin-top:1rem;color:var(--text-muted);font-size:0.65rem;line-height:1.5">
           Appointments are only available during my off-shift rotation. Please check the calendar for specific openings over the next 4 months.
@@ -333,12 +284,10 @@
       <h2 class="section-title">My <em>Work</em></h2>
       <div class="gold-line"></div>
     </div>
-    <button class="owner-mode-btn" id="ownerBtn" onclick="requestOwnerMode()">🔒 Owner Login</button>
-    <div class="owner-mode-banner" id="ownerBanner">
-      ✦ Owner Mode Active — hover any slot to upload or remove a photo.
-      <button onclick="exitOwnerMode()">Exit</button>
+    <div class="gallery-embed">
+      <iframe src="https://drive.google.com/embeddedfolderview?id=1-BNVqzhHsHr07-AfJ07JbmGJEYOyBqc3#grid" title="SetsByBryalla Gallery"></iframe>
     </div>
-    <div class="gallery-grid" id="galleryGrid"></div>
+    <p class="gallery-embed-note">✦ Photos are managed through a shared Google Drive folder — anyone with upload access can add a photo from their phone or computer and it appears here automatically.</p>
   </section>
 </div>
 
@@ -437,71 +386,7 @@
     if (document.getElementById('page-' + initial)) goTo(initial); else goTo('home');
   });
 
-  /* ---------- GALLERY (owner upload) ---------- */
-  const OWNER_PASSWORD = 'velour2026';
-  const SLOT_COUNT = 8;
-  let ownerMode = false;
-  let images = [];
-  try { images = JSON.parse(localStorage.getItem('sbb_gallery') || '[]'); } catch(e) { images = []; }
-  while (images.length < SLOT_COUNT) images.push(null);
-
-  function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
-    grid.innerHTML = '';
-    for (let i = 0; i < SLOT_COUNT; i++) {
-      const item = document.createElement('div');
-      item.className = 'gallery-item' + (ownerMode ? ' owner-active' : '');
-      if (images[i]) {
-        const img = document.createElement('img');
-        img.src = images[i];
-        item.appendChild(img);
-      } else {
-        const ph = document.createElement('div');
-        ph.className = 'gallery-placeholder';
-        ph.innerHTML = '<div class="gallery-placeholder-icon">✦</div>';
-        item.appendChild(ph);
-      }
-      if (ownerMode) {
-        const overlay = document.createElement('div');
-        overlay.className = 'owner-overlay';
-        overlay.innerHTML = `<button class="owner-overlay-btn upload" onclick="event.stopPropagation();triggerUpload(${i})">${images[i] ? 'Replace' : 'Upload'}</button>`;
-        if (images[i]) overlay.innerHTML += `<button class="owner-overlay-btn remove" onclick="event.stopPropagation();removeImage(${i})">Remove</button>`;
-        item.appendChild(overlay);
-        const fi = document.createElement('input');
-        fi.type = 'file'; fi.id = 'fi_' + i; fi.style.display = 'none';
-        fi.onchange = function() { loadImage(this, i); };
-        item.appendChild(fi);
-      }
-      grid.appendChild(item);
-    }
-  }
-  function triggerUpload(i) { document.getElementById('fi_' + i).click(); }
-  function loadImage(input, i) {
-    const reader = new FileReader();
-    reader.onload = e => { images[i] = e.target.result; saveGallery(); renderGallery(); showToast('Photo saved ✦'); };
-    reader.readAsDataURL(input.files[0]);
-  }
-  function removeImage(i) { images[i] = null; saveGallery(); renderGallery(); showToast('Photo removed.'); }
-  function saveGallery() { localStorage.setItem('sbb_gallery', JSON.stringify(images)); }
-  function requestOwnerMode() { document.getElementById('pwModal').classList.add('open'); }
-  function checkPassword() {
-    if (document.getElementById('pwInput').value === OWNER_PASSWORD) {
-      ownerMode = true; closeModal();
-      document.getElementById('ownerBtn').textContent = '🔓 Owner Mode On';
-      document.getElementById('ownerBanner').style.display = 'block';
-      renderGallery();
-    } else {
-      showToast('Incorrect password.');
-    }
-  }
-  function exitOwnerMode() { ownerMode = false; document.getElementById('ownerBanner').style.display = 'none'; renderGallery(); }
-  function closeModal() { document.getElementById('pwModal').classList.remove('open'); document.getElementById('pwInput').value = ''; }
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3500);
-  }
-  renderGallery();
+  /* Gallery is now a Google Drive folder embed — no JS needed, see the iframe above. */
 
   /* ---------- SERVICE MENU ---------- */
   const menuData = [
