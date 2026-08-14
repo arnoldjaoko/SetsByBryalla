@@ -116,9 +116,18 @@
     align-items: center; justify-content: center; gap: 0.75rem;
     color: rgba(201,168,76,0.2); padding: 1rem;
   }
-  .gallery-embed { border: 0.5px solid rgba(201,168,76,0.2); background: var(--charcoal); }
-  .gallery-embed iframe { width: 100%; height: 650px; border: none; display: block; }
-  .gallery-embed-note { margin-top: 1.2rem; font-size: 0.65rem; color: var(--text-muted); line-height: 1.8; max-width: 600px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 2.5rem; }
+  .gallery-item {
+    position: relative; overflow: hidden; aspect-ratio: 1;
+    background: var(--charcoal); border: 0.5px solid rgba(201,168,76,0.12); transition: border-color 0.3s;
+  }
+  .gallery-placeholder {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0.75rem;
+    color: rgba(201,168,76,0.2); padding: 1rem;
+  }
+  .gallery-placeholder-icon { font-size: 1.6rem; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* FAQ */
   .faq-list { max-width: 760px; margin-top: 3rem; border-top: 0.5px solid rgba(201,168,76,0.2); }
@@ -284,10 +293,7 @@
       <h2 class="section-title">My <em>Work</em></h2>
       <div class="gold-line"></div>
     </div>
-    <div class="gallery-embed">
-      <iframe src="https://drive.google.com/embeddedfolderview?id=1-BNVqzhHsHr07-AfJ07JbmGJEYOyBqc3#grid" title="SetsByBryalla Gallery"></iframe>
-    </div>
-    <p class="gallery-embed-note">✦ Photos are managed through a shared Google Drive folder — anyone with upload access can add a photo from their phone or computer and it appears here automatically.</p>
+    <div class="gallery-grid" id="galleryGrid"></div>
   </section>
 </div>
 
@@ -386,7 +392,65 @@
     if (document.getElementById('page-' + initial)) goTo(initial); else goTo('home');
   });
 
-  /* Gallery is now a Google Drive folder embed — no JS needed, see the iframe above. */
+  /* ---------- GALLERY ----------
+     HOW TO ADD PHOTOS (works instantly for every visitor, from any device):
+     1. On github.com, open this repo, go into the "images" folder
+        (create it at the repo root, next to index.html, if it's not there yet).
+     2. Click "Add file" -> "Upload files", drag in your photo(s), and commit.
+        (Anyone added as a repo Collaborator can do this from their phone or laptop.)
+     3. That's it — no code editing needed. Every photo displays as a clean,
+        uniform square tile (cropped to fit) automatically — no manual resizing needed.
+     Empty slots below just show a placeholder ✦ until real photos are added.
+  ---------------------------------- */
+  const GITHUB_USER = 'arnoldjaoko';
+  const GITHUB_REPO = 'SetsByBryalla';
+  const GITHUB_BRANCH = 'main';
+  const IMAGE_FOLDER = 'images';
+  const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+  const MIN_SLOTS = 8;
+
+  async function fetchGalleryPhotos() {
+    try {
+      const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${IMAGE_FOLDER}?ref=${GITHUB_BRANCH}`);
+      if (!res.ok) return [];
+      const files = await res.json();
+      if (!Array.isArray(files)) return [];
+      return files
+        .filter(f => f.type === 'file' && IMAGE_EXTENSIONS.some(ext => f.name.toLowerCase().endsWith('.' + ext)))
+        .sort((a, b) => b.name.localeCompare(a.name))
+        .map(f => ({ src: f.download_url, alt: 'SetsByBryalla nail set' }));
+    } catch (e) {
+      console.error('Gallery fetch error', e);
+      return [];
+    }
+  }
+
+  async function renderGallery() {
+    const grid = document.getElementById('galleryGrid');
+    if (!grid) return;
+    const photos = await fetchGalleryPhotos();
+    grid.innerHTML = '';
+    const slotCount = Math.max(MIN_SLOTS, photos.length);
+    for (let i = 0; i < slotCount; i++) {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      const photo = photos[i];
+      if (photo) {
+        const img = document.createElement('img');
+        img.src = photo.src;
+        img.alt = photo.alt;
+        img.loading = 'lazy';
+        item.appendChild(img);
+      } else {
+        const ph = document.createElement('div');
+        ph.className = 'gallery-placeholder';
+        ph.innerHTML = '<div class="gallery-placeholder-icon">✦</div>';
+        item.appendChild(ph);
+      }
+      grid.appendChild(item);
+    }
+  }
+  renderGallery();
 
   /* ---------- SERVICE MENU ---------- */
   const menuData = [
