@@ -458,40 +458,63 @@
   
 const menuData = [
   { name: 'Manicure', price: '$20', duration: '60m', slug: 'manicure-20' },
-  { name: 'Gel X Nails — Medium', price: '$40', duration: '90m', slug: 'gel-x-nails-medium-40' },
-  { name: 'Acrylic Nails — Medium', price: '$50', duration: '90m', slug: 'acrylic-nails-medium-50' },
-  { name: 'Acrylic Fill — Overlay/Short', price: '$15', duration: '60m', slug: 'acrylic-fill-overlay-short-15' },
+  { name: 'Gel X Nails — Short', price: '$30', duration: '90m', slug: 'gel-x-nails-short-30' },
+  { name: 'Gel X Nails — Medium', price: '$40', duration: '90m', slug: 'gel-x-nails-medium-40' }, 
+  { name: 'Gel X Nails — Long', price: '$50', duration: '120m', slug: 'gel-x-nails-long-50' }, 
+  { name: 'Gel X Nails — XL+', price: '$65', duration: '120m', slug: 'gel-x-nails-xl-65' }, 
+  { name: 'Acrylic Nails — Overlay', price: '$30', duration: '60m', slug: 'acrylic-nails-overlay-30' }, 
+  { name: 'Acrylic Nails — Short', price: '$40', duration: '90m', slug: 'acrylic-nails-short-40' },
+  { name: 'Acrylic Nails — Medium', price: '$50', duration: '90m', slug: 'acrylic-nails-medium-50' }, 
+  { name: 'Acrylic Nails — Long', price: '$60', duration: '120m', slug: 'acrylic-nails-long-60' }, 
+  { name: 'Acrylic Nails — XL+', price: '$75', duration: '120m', slug: 'acrylic-nails-xl-75' }, 
+  { name: 'Acrylic Fill — Overlay/Short', price: '$15', duration: '60m', slug: 'acrylic-fill-overlay-short-15' }, 
   { name: 'Acrylic Fill — Medium/Long', price: '$20', duration: '90m', slug: 'acrylic-fill-20' },
   { name: 'Acrylic Fill — XL+', price: '$30', duration: '105m', slug: 'acrylic-fill-xl-30' }
-];
+ ];
+ 
+ function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  if (!grid) return;
 
-  function renderMenu() {
-    const grid = document.getElementById('menuGrid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    menuData.forEach(m => {
+  grid.innerHTML = '';
+
+  const featuredServiceSlugs = [
+    'manicure-20',
+    'gel-x-nails-medium-40',
+    'acrylic-nails-medium-50',
+    'acrylic-fill-overlay-short-15'
+  ];
+
+  menuData
+    .filter(service => featuredServiceSlugs.includes(service.slug))
+    .forEach(m => {
       const card = document.createElement('div');
       card.className = 'menu-card';
+
       card.onclick = () => {
         goTo('booking');
+
         const serviceSelect = document.getElementById('calendarService');
         if (serviceSelect) {
           serviceSelect.value = m.slug;
           changeBookingService();
         }
       };
+
       card.innerHTML = `
         <p class="menu-card-name">${m.name}</p>
         <div class="menu-card-meta">
           <span class="menu-card-price">${m.price}</span>
           <span class="menu-card-duration">${m.duration}</span>
         </div>
-        <p class="menu-card-book">Book This Service →</p>`;
+        <p class="menu-card-book">Book This Service →</p>
+      `;
+
       grid.appendChild(card);
     });
-  }
-  renderMenu();
+}
 
+renderMenu(); 
  
 function populateBookingServices() {
   const select = document.getElementById('calendarService');
