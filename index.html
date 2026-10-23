@@ -759,6 +759,45 @@ function renderBookingForm(displayTime) {
           >
         </div>
 
+
+<div class="form-group">
+  <label for="clientPhone">Phone Number *</label>
+  <input
+    type="tel"
+    class="form-input"
+    id="clientPhone"
+    placeholder="+1 320 555 0123"
+    autocomplete="tel"
+    required
+  >
+</div>
+
+<div class="form-group">
+  <label for="paymentMethod">Payment Method *</label>
+  <select
+    id="paymentMethod"
+    class="form-input"
+    required
+  >
+    <option value="">Choose your payment method</option>
+    <option value="CashApp">CashApp</option>
+    <option value="Venmo">Venmo</option>
+    <option value="Zelle">Zelle</option>
+    <option value="Apple Cash">Apple Cash</option>
+    <option value="Physical Cash">Physical Cash</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="additionalNotes">Additional Notes (Optional)</label>
+  <textarea
+    id="additionalNotes"
+    class="form-input"
+    rows="3"
+    placeholder="Nail design ideas, special requests, etc."
+  ></textarea>
+</div>
+
         <div class="form-actions" style="margin-top:0.5rem">
           <button type="submit" class="btn-primary" style="width:100%">
             Confirm Reservation for ${displayTime}
@@ -775,7 +814,10 @@ async function handleBookingSubmit(e) {
   const name = document.getElementById('clientName').value.trim();
   const email = document.getElementById('clientEmail').value.trim();
   const service = document.getElementById('calendarService').value;
-
+  const phone = document.getElementById('clientPhone').value.trim();
+  const paymentMethod = document.getElementById('paymentMethod').value;
+  const additionalNotes = document.getElementById('additionalNotes').value.trim();
+ 
   // Check that all required information is available.
   if (!name || !email || !selectedTime) {
     showToast('Please select a time and enter your name and email.');
@@ -798,7 +840,10 @@ async function handleBookingSubmit(e) {
         name: name,
         email: email,
         start: selectedTime,
-        service: service
+        service: service,
+        phone: phone,
+        paymentMethod: paymentMethod,
+        additionalNotes: additionalNotes
       })
     });
 
