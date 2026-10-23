@@ -815,26 +815,27 @@ function renderBookingForm(displayTime) {
   `;
 }
   
+
 async function handleBookingSubmit(e) {
   e.preventDefault();
 
   const name = document.getElementById('clientName').value.trim();
   const email = document.getElementById('clientEmail').value.trim();
   const service = document.getElementById('calendarService').value;
-  
-  
-const phoneInput = document.getElementById('clientPhone').value.trim();
 
-const phoneDigits = phoneInput.replace(/\D/g, '');
+  // Get phone number and keep only digits
+  const phoneInput = document.getElementById('clientPhone').value.trim();
+  const phone = phoneInput.replace(/\D/g, '');
 
-
-if (phone.length !== 10) {
-  showToast('Please enter exactly 10 digits for your phone number.');
-  return;
-}
+  // Require exactly 10 digits
+  if (phone.length !== 10) {
+    showToast('Please enter exactly 10 digits for your phone number.');
+    return;
   }
- const paymentMethod = document.getElementById('paymentMethod').value;
- const additionalNotes = document.getElementById('additionalNotes').value.trim();
+
+  // Get payment method and additional notes
+  const paymentMethod = document.getElementById('paymentMethod').value;
+  const additionalNotes = document.getElementById('additionalNotes').value.trim();
 
   const submitBtn = e.target.querySelector('button[type="submit"]');
   const originalText = submitBtn.textContent;
