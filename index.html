@@ -334,6 +334,19 @@
       <p class="form-subtitle">Luxury awaits you</p>
       
       <!-- CUSTOM CALENDAR WIDGET -->
+     
+<div class="form-group">
+  <label for="calendarService">Choose Your Nail Service</label>
+  <select
+    class="form-select"
+    id="calendarService"
+    onchange="changeBookingService()"
+    required
+  >
+    <option value="">Select a service first</option>
+  </select>
+</div>
+
       <div class="booking-widget-container">
         <div id="calendarMainView">
           <div class="cal-nav-header">
@@ -443,18 +456,23 @@
   renderGallery();
 
   /* SERVICE MENU */
-  const menuData = [
-    { name: 'Manicure', price: '$20', duration: '60m' },
-    { name: 'Gel X Nails — Short', price: '$30', duration: '90m' },
-    { name: 'Gel X Nails — Medium', price: '$40', duration: '90m' },
-    { name: 'Gel X Nails — Long', price: '$50', duration: '120m' },
-    { name: 'Gel X Nails — XL+', price: '$65', duration: '120m' },
-    { name: 'Acrylic Nails — Overlay', price: '$30', duration: '60m' },
-    { name: 'Acrylic Nails — Short', price: '$40', duration: '90m' },
-    { name: 'Acrylic Nails — Medium', price: '$50', duration: '90m' },
-    { name: 'Acrylic Nails — Long', price: '$60', duration: '120m' },
-    { name: 'Acrylic Nails — XL+', price: '$75', duration: '120m' }
-  ];
+  
+const menuData = [
+  { name: 'Manicure', price: '$20', duration: '60m', slug: 'manicure-20' },
+  { name: 'Gel X Nails — Short', price: '$30', duration: '90m', slug: 'gel-x-nails-short-30' },
+  { name: 'Gel X Nails — Medium', price: '$40', duration: '90m', slug: 'gel-x-nails-medium-40' },
+  { name: 'Gel X Nails — Long', price: '$50', duration: '120m', slug: 'gel-x-nails-long-50' },
+  { name: 'Gel X Nails — XL+', price: '$65', duration: '120m', slug: 'gel-x-nails-xl-65' },
+  { name: 'Acrylic Nails — Overlay', price: '$30', duration: '60m', slug: 'acrylic-nails-overlay-30' },
+  { name: 'Acrylic Nails — Short', price: '$40', duration: '90m', slug: 'acrylic-nails-short-40' },
+  { name: 'Acrylic Nails — Medium', price: '$50', duration: '90m', slug: 'acrylic-nails-medium-50' },
+  { name: 'Acrylic Nails — Long', price: '$60', duration: '120m', slug: 'acrylic-nails-long-60' },
+  { name: 'Acrylic Nails — XL+', price: '$75', duration: '120m', slug: 'acrylic-nails-xl-75' },
+  { name: 'Acrylic Fill — Overlay/Short', price: '$15', duration: '60m', slug: 'acrylic-fill-overlay-short-15' },
+  { name: 'Acrylic Fill — Medium/Long', price: '$20', duration: '90m', slug: 'acrylic-fill-20' },
+  { name: 'Acrylic Fill — XL+', price: '$30', duration: '105m', slug: 'acrylic-fill-xl-30' }
+];
+
   function renderMenu() {
     const grid = document.getElementById('menuGrid');
     if (!grid) return;
@@ -474,6 +492,33 @@
     });
   }
   renderMenu();
+
+ 
+function populateBookingServices() {
+  const select = document.getElementById('calendarService');
+  if (!select) return;
+
+  select.innerHTML = '<option value="">Select a service first</option>';
+
+  menuData.forEach(service => {
+    const option = document.createElement('option');
+    option.value = service.slug;
+    option.textContent = `${service.name} — ${service.price} (${service.duration})`;
+    select.appendChild(option);
+  });
+}
+
+function changeBookingService() {
+  selectedDate = null;
+  selectedTime = null;
+
+  document.getElementById('slotSelectionContainer').innerHTML = '';
+  document.getElementById('bookingFormContainer').innerHTML = '';
+
+  renderCalendar();
+}
+
+populateBookingServices();
 
   /* FAQ */
   const faqData = [
@@ -586,6 +631,14 @@
   }
 
   async function selectDate(year, month, day) {
+   
+const serviceSlug = document.getElementById('calendarService').value;
+
+if (!serviceSlug) {
+  showToast('Please select your nail service first.');
+  return;
+}
+
     selectedDate = new Date(year, month, day);
     selectedTime = null;
     renderCalendar();
@@ -600,7 +653,15 @@
     document.getElementById('bookingFormContainer').innerHTML = '';
 
     try {
-      const res = await fetch(`${WORKER_URL}/api/availability?date=${formattedDate}&username=setsbybryalla&eventTypeSlug=manicure-20`);
+      
+const res = await fetch(
+  `${WORKER_URL}/api/availability?date=${formattedDate}&eventTypeSlug=${encodeURIComponent(serviceSlug)}`
+);
+
+if (!res.ok) {
+  throw new Error(`Availability request failed: ${res.status}`);
+}
+
       const result = await res.json();
       
       let rawSlots = [];
@@ -655,50 +716,65 @@
     renderBookingForm(displayTime);
   }
 
-  function renderBookingForm(displayTime) {
-    const container = document.getElementById('bookingFormContainer');
-    container.innerHTML = `
-      <div class="booking-user-form">
-        <p class="panel-title">Your Reservation Details</p>
-        <form onsubmit="handleBookingSubmit(event)">
-          <div class="form-group">
-            <label>Select Service</label>
-            <select class="form-select" id="bookingService" required>
-              <option value="Manicure — $20">Manicure — $20 (60m)</option>
-              <option value="Gel X Nails — Short — $30">Gel X Nails — Short — $30 (90m)</option>
-              <option value="Gel X Nails — Medium — $40">Gel X Nails — Medium — $40 (90m)</option>
-              <option value="Gel X Nails — Long — $50">Gel X Nails — Long — $50 (120m)</option>
-              <option value="Gel X Nails — XL+ — $65">Gel X Nails — XL+ — $65 (120m)</option>
-              <option value="Acrylic Nails — Overlay — $30">Acrylic Nails — Overlay — $30 (60m)</option>
-              <option value="Acrylic Nails — Short — $40">Acrylic Nails — Short — $40 (90m)</option>
-              <option value="Acrylic Nails — Medium — $50">Acrylic Nails — Medium — $50 (90m)</option>
-              <option value="Acrylic Nails — Long — $60">Acrylic Nails — Long — $60 (120m)</option>
-              <option value="Acrylic Nails — XL+ — $75">Acrylic Nails — XL+ — $75 (120m)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" class="form-input" id="clientName" placeholder="Jane Doe" required>
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" class="form-input" id="clientEmail" placeholder="jane@example.com" required>
-          </div>
-          <div class="form-actions" style="margin-top:0.5rem">
-            <button type="submit" class="btn-primary" style="width:100%">Confirm Reservation for ${displayTime}</button>
-          </div>
-        </form>
-      </div>
-    `;
+  
+function renderBookingForm(displayTime) {
+  const container = document.getElementById('bookingFormContainer');
+
+  const serviceSlug = document.getElementById('calendarService').value;
+  const service = menuData.find(item => item.slug === serviceSlug);
+
+  if (!service) {
+    showToast('Please select a service first.');
+    return;
   }
 
+  container.innerHTML = `
+    <div class="booking-user-form">
+      <p class="panel-title">Your Reservation Details</p>
+
+      <p style="color:var(--gold);margin-bottom:1rem;">
+        ${service.name} — ${service.price} (${service.duration})
+      </p>
+
+      <form onsubmit="handleBookingSubmit(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input
+            type="text"
+            class="form-input"
+            id="clientName"
+            placeholder="Jane Doe"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input
+            type="email"
+            class="form-input"
+            id="clientEmail"
+            placeholder="jane@example.com"
+            required
+          >
+        </div>
+
+        <div class="form-actions" style="margin-top:0.5rem">
+          <button type="submit" class="btn-primary" style="width:100%">
+            Confirm Reservation for ${displayTime}
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+}
   
 async function handleBookingSubmit(e) {
   e.preventDefault();
 
   const name = document.getElementById('clientName').value.trim();
   const email = document.getElementById('clientEmail').value.trim();
-  const service = document.getElementById('bookingService').value;
+  const service = document.getElementById('calendarService').value;
 
   // Check that all required information is available.
   if (!name || !email || !selectedTime) {
