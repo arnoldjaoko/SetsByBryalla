@@ -766,7 +766,7 @@ function renderBookingForm(displayTime) {
     type="tel"
     class="form-input"
     id="clientPhone"
-    placeholder="+1 320 555 0123"
+    placeholder="320 555 0123"
     autocomplete="tel"
     required
   >
@@ -817,21 +817,15 @@ async function handleBookingSubmit(e) {
   
 const phoneInput = document.getElementById('clientPhone').value.trim();
 
-const phone = phoneInput.replace(/\D/g, '');
+const phoneDigits = phoneInput.replace(/\D/g, '');
 
 let phone = '';
 
-if (phoneDigits.length !== 10) {
- showToast('Please enter a valid 10-digit US phone number.');
-  return;
-}
-
-  const paymentMethod = document.getElementById('paymentMethod').value;
-  const additionalNotes = document.getElementById('additionalNotes').value.trim();
+if (phoneDigits.length === 10) {
+  phone = phoneDigits;
  
-  // Check that all required information is available.
-  if (!name || !email || !selectedTime) {
-    showToast('Please select a time and enter your name and email.');
+} else {
+  showToast('Please enter a valid 10-digit US phone number.');
     return;
   }
 
