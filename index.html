@@ -827,7 +827,7 @@ const phoneInput = document.getElementById('clientPhone').value.trim();
 
 const phoneDigits = phoneInput.replace(/\D/g, '');
 
-if (!/^\d{10}$/.test(phone)) {
+if (!/^\d{10}$/.test(phoneNumber)) {
   showToast('Please enter exactly 10 digits for your phone number.');
   return;
   }
