@@ -480,7 +480,14 @@ const menuData = [
     menuData.forEach(m => {
       const card = document.createElement('div');
       card.className = 'menu-card';
-      card.onclick = () => goTo('booking');
+      card.onclick = () => {
+        goTo('booking');
+        const serviceSelect = document.getElementById('calendarService');
+        if (serviceSelect) {
+          serviceSelect.value = m.slug;
+          changeBookingService();
+        }
+      };
       card.innerHTML = `
         <p class="menu-card-name">${m.name}</p>
         <div class="menu-card-meta">
@@ -814,6 +821,8 @@ async function handleBookingSubmit(e) {
   const name = document.getElementById('clientName').value.trim();
   const email = document.getElementById('clientEmail').value.trim();
   const service = document.getElementById('calendarService').value;
+  const paymentMethod = document.getElementById('paymentMethod').value;
+  const additionalNotes = document.getElementById('additionalNotes').value.trim();
   
 const phoneInput = document.getElementById('clientPhone').value.trim();
 
