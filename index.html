@@ -817,19 +817,12 @@ async function handleBookingSubmit(e) {
   
 const phoneInput = document.getElementById('clientPhone').value.trim();
 
-const phoneDigits = phoneInput.replace(/\D/g, '');
+const phone = phoneInput.replace(/\D/g, '');
 
 let phone = '';
 
-if (phoneDigits.length === 10) {
-  phone = '+1' + phoneDigits;
-} else if (
-  phoneDigits.length === 11 &&
-  phoneDigits.startsWith('1')
-) {
-  phone = '+' + phoneDigits;
-} else {
-  showToast('Please enter a valid 10-digit US phone number.');
+if (phoneDigits.length !== 10) {
+ showToast('Please enter a valid 10-digit US phone number.');
   return;
 }
 
