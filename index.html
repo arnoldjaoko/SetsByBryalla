@@ -586,136 +586,67 @@
   }
 
   async function selectDate(year, month, day) {
-    selectedDate = new Date(year, month, day);
-    selectedTime = null;
-    renderCalendar();
-    
-    const container = document.getElementById('slotSelectionContainer');
-    const formattedDate = selectedDate.toISOString().split('T')[0];
-    
-    container.innerHTML = `<p style="font-size:0.7rem;color:var(--gold);margin-top:1rem;">Checking available slots...</p>`;
-    document.getElementById('bookingFormContainer').innerHTML = '';
+  selectedDate = new Date(year, month, day);
+  selectedTime = null;
+  renderCalendar();
+  
+  const container = document.getElementById('slotSelectionContainer');
+  
+  // Format date correctly as YYYY-MM-DD
+  const yyyy = selectedDate.getFullYear();
+  const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
+  const dd = String(selectedDate.getDate()).padStart(2, '0');
+  const formattedDate = `${yyyy}-${mm}-${dd}`;
+  
+  container.innerHTML = `<p style="font-size:0.7rem;color:var(--gold);margin-top:1rem;">Checking available slots...</p>`;
+  document.getElementById('bookingFormContainer').innerHTML = '';
 
-    try {
-      const res = await fetch(`${WORKER_URL}/api/availability?date=${formattedDate}`);
-      const data = await res.json();
-      renderTimeSlots(data.slots || []);
-    } catch (err) {
-      console.error(err);
-      container.innerHTML = `<p style="font-size:0.7rem;color:var(--text-muted);margin-top:1rem;">Could not load slots. Please try another date.</p>`;
+  try {
+    const res = await fetch(`${WORKER_URL}/api/availability?date=${formattedDate}&username=setsbybryalla`);
+    const result = await res.json();
+    
+    // Cal.com API v2 returns slots inside result.data.slots object or result.data
+    let rawSlots = [];
+    if (result.data && result.data.slots) {
+      rawSlots = result.data.slots[formattedDate] || Object.values(result.data.slots).flat();
+    } else if (result.data && Array.isArray(result.data)) {
+      rawSlots = result.data;
+    } else if (result.slots) {
+      rawSlots = Array.isArray(result.slots) ? result.slots : (result.slots[formattedDate] || []);
     }
+    
+    renderTimeSlots(rawSlots);
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = `<p style="font-size:0.7rem;color:var(--text-muted);margin-top:1rem;">Could not load slots. Please try another date.</p>`;
   }
+}
 
-  function renderTimeSlots(slots) {
-    const container = document.getElementById('slotSelectionContainer');
-    const dateFormatted = selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+function renderTimeSlots(slots) {
+  const container = document.getElementById('slotSelectionContainer');
+  const dateFormatted = selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
 
-    if (!slots || slots.length === 0) {
-      container.innerHTML = `
-        <div class="slot-selection-panel">
-          <p class="panel-title">No openings for ${dateFormatted}</p>
-        </div>`;
-      return;
-    }
-
-    let slotButtons = slots.map(slot => {
-      const timeLabel = new Date(slot.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      return `<button class="slot-btn" type="button" onclick="selectTime('${slot.time}', '${timeLabel}', this)">${timeLabel}</button>`;
-    }).join('');
-
+  if (!slots || slots.length === 0) {
     container.innerHTML = `
       <div class="slot-selection-panel">
-        <p class="panel-title">Available times for ${dateFormatted}</p>
-        <div class="slots-grid">${slotButtons}</div>
-      </div>
-    `;
+        <p class="panel-title">No openings for ${dateFormatted}</p>
+      </div>`;
+    return;
   }
 
-  function selectTime(isoTime, displayTime, btn) {
-    document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    selectedTime = isoTime;
-    renderBookingForm(displayTime);
-  }
+  let slotButtons = slots.map(slot => {
+    const timeValue = slot.time || slot.start || slot;
+    const timeLabel = new Date(timeValue).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return `<button class="slot-btn" type="button" onclick="selectTime('${timeValue}', '${timeLabel}', this)">${timeLabel}</button>`;
+  }).join('');
 
-  function renderBookingForm(displayTime) {
-    const container = document.getElementById('bookingFormContainer');
-    container.innerHTML = `
-      <div class="booking-user-form">
-        <p class="panel-title">Your Reservation Details</p>
-        <form onsubmit="handleBookingSubmit(event)">
-          <div class="form-group">
-            <label>Select Service</label>
-            <select class="form-select" id="bookingService" required>
-              <option value="Manicure — $20">Manicure — $20 (60m)</option>
-              <option value="Gel X Nails — Short — $30">Gel X Nails — Short — $30 (90m)</option>
-              <option value="Gel X Nails — Medium — $40">Gel X Nails — Medium — $40 (90m)</option>
-              <option value="Gel X Nails — Long — $50">Gel X Nails — Long — $50 (120m)</option>
-              <option value="Gel X Nails — XL+ — $65">Gel X Nails — XL+ — $65 (120m)</option>
-              <option value="Acrylic Nails — Overlay — $30">Acrylic Nails — Overlay — $30 (60m)</option>
-              <option value="Acrylic Nails — Short — $40">Acrylic Nails — Short — $40 (90m)</option>
-              <option value="Acrylic Nails — Medium — $50">Acrylic Nails — Medium — $50 (90m)</option>
-              <option value="Acrylic Nails — Long — $60">Acrylic Nails — Long — $60 (120m)</option>
-              <option value="Acrylic Nails — XL+ — $75">Acrylic Nails — XL+ — $75 (120m)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" class="form-input" id="clientName" placeholder="Jane Doe" required>
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" class="form-input" id="clientEmail" placeholder="jane@example.com" required>
-          </div>
-          <div class="form-actions" style="margin-top:0.5rem">
-            <button type="submit" class="btn-primary" style="width:100%">Confirm Reservation for ${displayTime}</button>
-          </div>
-        </form>
-      </div>
-    `;
-  }
-
-  async function handleBookingSubmit(e) {
-    e.preventDefault();
-    const name = document.getElementById('clientName').value;
-    const email = document.getElementById('clientEmail').value;
-    const service = document.getElementById('bookingService').value;
-
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    submitBtn.textContent = 'Reserving...';
-    submitBtn.disabled = true;
-
-    try {
-      const res = await fetch(`${WORKER_URL}/api/book`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          start: selectedTime,
-          responses: { name, email, notes: service }
-        })
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        showToast(`Appointment confirmed for ${name}!`);
-        selectedDate = null;
-        selectedTime = null;
-        document.getElementById('slotSelectionContainer').innerHTML = '';
-        document.getElementById('bookingFormContainer').innerHTML = '';
-        renderCalendar();
-      } else {
-        showToast(data.error || 'Booking failed. Please try again.');
-        submitBtn.textContent = 'Confirm Reservation';
-        submitBtn.disabled = false;
-      }
-    } catch (err) {
-      console.error(err);
-      showToast('Network error. Please try again.');
-      submitBtn.textContent = 'Confirm Reservation';
-      submitBtn.disabled = false;
-    }
-  }
+  container.innerHTML = `
+    <div class="slot-selection-panel">
+      <p class="panel-title">Available times for ${dateFormatted}</p>
+      <div class="slots-grid">${slotButtons}</div>
+    </div>
+  `;
+}
 </script>
 
 </body>
