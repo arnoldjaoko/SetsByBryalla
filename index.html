@@ -704,7 +704,11 @@ if (!res.ok) {
 
     let slotButtons = slots.map(slot => {
       const timeValue = slot.time || slot.start || slot;
-      const timeLabel = new Date(timeValue).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const timeLabel = new Date(timeValue).toLocaleTimeString('en-US', {
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZone: 'America/Chicago'
+});
       return `<button class="slot-btn" type="button" onclick="selectTime('${timeValue}', '${timeLabel}', this)">${timeLabel}</button>`;
     }).join('');
 
@@ -832,7 +836,6 @@ async function handleBookingSubmit(e) {
     showToast('Please enter exactly 10 digits for your phone number.');
     return;
   }
-
   // Get payment method and additional notes
   const paymentMethod = document.getElementById('paymentMethod').value;
   const additionalNotes = document.getElementById('additionalNotes').value.trim();
