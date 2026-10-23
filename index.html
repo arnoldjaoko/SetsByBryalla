@@ -814,7 +814,25 @@ async function handleBookingSubmit(e) {
   const name = document.getElementById('clientName').value.trim();
   const email = document.getElementById('clientEmail').value.trim();
   const service = document.getElementById('calendarService').value;
-  const phone = document.getElementById('clientPhone').value.trim();
+  
+const phoneInput = document.getElementById('clientPhone').value.trim();
+
+const phoneDigits = phoneInput.replace(/\D/g, '');
+
+let phone = '';
+
+if (phoneDigits.length === 10) {
+  phone = '+1' + phoneDigits;
+} else if (
+  phoneDigits.length === 11 &&
+  phoneDigits.startsWith('1')
+) {
+  phone = '+' + phoneDigits;
+} else {
+  showToast('Please enter a valid 10-digit US phone number.');
+  return;
+}
+
   const paymentMethod = document.getElementById('paymentMethod').value;
   const additionalNotes = document.getElementById('additionalNotes').value.trim();
  
