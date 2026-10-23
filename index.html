@@ -600,16 +600,16 @@
     document.getElementById('bookingFormContainer').innerHTML = '';
 
     try {
-      const res = await fetch(`${WORKER_URL}/api/availability?date=${formattedDate}&username=setsbybryalla`);
+      const res = await fetch(`${WORKER_URL}/api/availability?date=${formattedDate}&username=setsbybryalla&eventTypeSlug=manicure-20`);
       const result = await res.json();
       
       let rawSlots = [];
-      if (result.data && result.data.slots) {
-        rawSlots = result.data.slots[formattedDate] || Object.values(result.data.slots).flat();
-      } else if (result.data && Array.isArray(result.data)) {
-        rawSlots = result.data;
-      } else if (result.slots) {
-        rawSlots = Array.isArray(result.slots) ? result.slots : (result.slots[formattedDate] || []);
+      if (result.data) {
+        if (typeof result.data === 'object' && !Array.isArray(result.data)) {
+          rawSlots = result.data[formattedDate] || Object.values(result.data).flat();
+        } else if (Array.isArray(result.data)) {
+          rawSlots = result.data;
+        }
       }
       
       renderTimeSlots(rawSlots);
