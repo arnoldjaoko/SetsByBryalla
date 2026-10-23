@@ -606,10 +606,13 @@
       let rawSlots = [];
       if (result.data) {
         if (typeof result.data === 'object' && !Array.isArray(result.data)) {
+          // Handle object keyed by date (e.g. {"2026-10-28": [...]})
           rawSlots = result.data[formattedDate] || Object.values(result.data).flat();
         } else if (Array.isArray(result.data)) {
           rawSlots = result.data;
         }
+      } else if (result.slots) {
+        rawSlots = Array.isArray(result.slots) ? result.slots : (result.slots[formattedDate] || Object.values(result.slots).flat());
       }
       
       renderTimeSlots(rawSlots);
