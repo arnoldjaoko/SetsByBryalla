@@ -78,7 +78,7 @@
   .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--cream); margin-bottom: 0.75rem; }
   .service-desc { font-size: 0.72rem; line-height: 1.8; color: var(--text-muted); }
 
-  /* SERVICE MENU (real bookable services) */
+  /* SERVICE MENU */
   .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1px; margin-top: 3rem; background: rgba(201,168,76,0.2); border: 0.5px solid rgba(201,168,76,0.2); }
   .menu-card { background: var(--charcoal); padding: 1.8rem 1.6rem; text-decoration: none; display: block; transition: background 0.3s; cursor: pointer; }
   .menu-card:hover { background: rgba(201,168,76,0.06); }
@@ -89,12 +89,8 @@
   .menu-card-book { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.9rem; }
   .menu-card:hover .menu-card-book { color: var(--gold); }
   .menu-note { max-width: 700px; margin-top: 2rem; font-size: 0.68rem; color: var(--text-muted); line-height: 1.9; }
-  .policy-box { border: 0.5px solid rgba(201,168,76,0.25); background: rgba(201,168,76,0.03); padding: 1.8rem; margin-top: 1.5rem; }
-  .policy-box p { font-size: 0.72rem; color: var(--text-muted); line-height: 2; }
-  .policy-box strong { color: var(--gold); font-weight: 500; }
-  .policy-box a { color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--gold); }
 
-  /* HOME TEASER STRIP (gallery/faq/testimonial links) */
+  /* TEASER STRIP */
   .teaser-strip { background: var(--black); display: grid; grid-template-columns: repeat(3, 1fr); border-top: 0.5px solid rgba(201,168,76,0.15); }
   .teaser-card { padding: 3rem 2.5rem; border-right: 0.5px solid rgba(201,168,76,0.15); cursor: pointer; transition: background 0.3s; }
   .teaser-card:last-child { border-right: none; }
@@ -106,16 +102,6 @@
 
   /* GALLERY */
   .gallery-intro { max-width: 500px; }
-  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 2.5rem; }
-  .gallery-item {
-    position: relative; overflow: hidden; aspect-ratio: 1;
-    background: var(--charcoal); border: 0.5px solid rgba(201,168,76,0.12); transition: border-color 0.3s;
-  }
-  .gallery-placeholder {
-    width: 100%; height: 100%; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 0.75rem;
-    color: rgba(201,168,76,0.2); padding: 1rem;
-  }
   .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 2.5rem; }
   .gallery-item {
     position: relative; overflow: hidden; aspect-ratio: 1;
@@ -144,7 +130,6 @@
   .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
   .faq-item.open .faq-answer { max-height: 400px; }
   .faq-answer-inner { padding: 0 0.5rem 1.5rem; font-size: 0.78rem; line-height: 1.9; color: var(--text-muted); }
-  .faq-note { max-width: 760px; margin-top: 2.5rem; padding: 1.2rem 1.5rem; border: 0.5px dashed rgba(201,168,76,0.3); font-size: 0.65rem; color: var(--text-muted); line-height: 1.8; }
 
   /* TESTIMONIALS */
   .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
@@ -154,7 +139,7 @@
   .testimonial-author { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
   .testimonial-service { font-size: 0.65rem; color: var(--text-muted); margin-top: 0.2rem; }
 
-  /* SCHEDULE (home) */
+  /* SCHEDULE */
   .schedule-section { background: var(--charcoal); }
   .schedule-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; align-items: start; }
   .schedule-hours { border: 0.5px solid rgba(201,168,76,0.2); }
@@ -165,16 +150,36 @@
   .day-hours { color: var(--gold); font-weight: 500; }
   .day-closed { color: var(--text-muted); font-style: italic; }
 
-  /* BOOKING */
-  .booking-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; margin-top: 3rem; align-items: start; }
-  .booking-info-text { font-size: 0.8rem; line-height: 2; color: var(--text-muted); margin-bottom: 2rem; }
-  .booking-details { display: flex; flex-direction: column; gap: 1rem; }
-  .booking-detail-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.72rem; color: var(--cream); }
-  .detail-dot { width: 5px; height: 5px; background: var(--gold); flex-shrink: 0; }
-  .booking-form { background: var(--charcoal); border: 0.5px solid rgba(201,168,76,0.2); padding: 1.5rem; }
-  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--cream); margin-bottom: 0.25rem; }
-  .form-subtitle { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
-  .form-note { font-size: 0.6rem; color: var(--text-muted); text-align: center; margin-top: 1rem; line-height: 1.6; }
+  /* CUSTOM BOOKING WIDGET STYLES (CALENDAR GRID FIX) */
+  .booking-form { background: var(--charcoal); border: 0.5px solid rgba(201,168,76,0.2); padding: 2rem; max-width: 600px; margin: 4rem auto; }
+  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--cream); margin-bottom: 0.25rem; text-align: center; }
+  .form-subtitle { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2rem; text-align: center; }
+  
+  .cal-nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+  .cal-month-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--cream); }
+  .cal-nav-btn { background: none; border: 0.5px solid rgba(201,168,76,0.3); color: var(--gold); width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
+  .cal-nav-btn:hover { background: rgba(201,168,76,0.1); }
+  
+  .cal-weekdays { display: grid !important; grid-template-columns: repeat(7, 1fr) !important; text-align: center; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 0.8rem; text-transform: uppercase; }
+  .cal-grid { display: grid !important; grid-template-columns: repeat(7, 1fr) !important; gap: 6px !important; }
+  .cal-day { aspect-ratio: 1; display: flex !important; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--cream); background: rgba(13,13,13,0.6); border: 0.5px solid rgba(201,168,76,0.15); cursor: pointer; transition: all 0.2s; min-height: 40px; }
+  .cal-day:hover:not(.disabled) { border-color: var(--gold); background: rgba(201,168,76,0.15); }
+  .cal-day.today { border-color: var(--gold); }
+  .cal-day.selected { background: var(--gold) !important; color: var(--black) !important; font-weight: 600; }
+  .cal-day.disabled { opacity: 0.25; cursor: not-allowed; }
+  .cal-day.empty { background: transparent; border: none; cursor: default; }
+
+  .slot-selection-panel { margin-top: 1.5rem; border-top: 0.5px solid rgba(201,168,76,0.2); padding-top: 1.5rem; }
+  .panel-title { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .slots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; }
+  .slot-btn { background: var(--black); border: 0.5px solid rgba(201,168,76,0.3); color: var(--cream); padding: 0.6rem; font-size: 0.7rem; cursor: pointer; text-align: center; transition: all 0.2s; }
+  .slot-btn:hover, .slot-btn.selected { background: var(--gold); color: var(--black); font-weight: 600; }
+
+  .booking-user-form { margin-top: 1.5rem; border-top: 0.5px solid rgba(201,168,76,0.2); padding-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+  .form-input, .form-select { background: var(--black); border: 0.5px solid rgba(201,168,76,0.3); color: var(--cream); padding: 0.8rem; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; width: 100%; outline: none; }
+  .form-input:focus, .form-select:focus { border-color: var(--gold); }
 
   /* FOOTER */
   footer { background: #080808; padding: 3rem 4rem; border-top: 0.5px solid rgba(201,168,76,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
@@ -290,7 +295,7 @@
   <section id="gallery" style="padding-top:8rem">
     <div class="gallery-intro">
       <p class="section-label">Gallery</p>
-      <h2 class="section-title"><em></em></h2>
+      <h2 class="section-title"><em>Portfolio</em></h2>
       <div class="gold-line"></div>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
@@ -317,30 +322,38 @@
   </section>
 </div>
 
-<!-- BOOKING -->
-<div class="booking-form">
-  <p class="form-title">Reserve Your Seat</p>
-  <p class="form-subtitle">Luxury awaits you</p>
-  
-  <!-- CUSTOM CALENDAR WIDGET -->
-  <div class="booking-widget-container">
-    <div id="calendarMainView">
-      <div class="cal-nav-header">
-        <button class="cal-nav-btn" type="button" onclick="changeMonth(-1)">‹</button>
-        <div class="cal-month-title" id="calMonthTitle"></div>
-        <button class="cal-nav-btn" type="button" onclick="changeMonth(1)">›</button>
-      </div>
-      <div class="cal-weekdays">
-        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
-    </div>
+<!-- BOOKING PAGE -->
+<div class="page" id="page-booking">
+  <section style="padding-top:8rem">
+    <p class="section-label">Reservations</p>
+    <h2 class="section-title">Book Your <em>Appointment</em></h2>
+    <div class="gold-line"></div>
+    
+    <div class="booking-form" style="margin: 0 auto; max-width: 600px;">
+      <p class="form-title">Reserve Your Seat</p>
+      <p class="form-subtitle">Luxury awaits you</p>
+      
+      <!-- CUSTOM CALENDAR WIDGET -->
+      <div class="booking-widget-container">
+        <div id="calendarMainView">
+          <div class="cal-nav-header">
+            <button class="cal-nav-btn" type="button" onclick="changeMonth(-1)">‹</button>
+            <div class="cal-month-title" id="calMonthTitle"></div>
+            <button class="cal-nav-btn" type="button" onclick="changeMonth(1)">›</button>
+          </div>
+          <div class="cal-weekdays">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
 
-    <!-- Time slots and booking form appear here dynamically -->
-    <div id="slotSelectionContainer"></div>
-    <div id="bookingFormContainer"></div>
-  </div>
+        <div id="slotSelectionContainer"></div>
+        <div id="bookingFormContainer"></div>
+      </div>
+    </div>
+  </section>
 </div>
+
 <footer>
   <div class="footer-logo"><em>SetsBy</em>Bryalla</div>
   <ul class="footer-links">
@@ -355,30 +368,30 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  /* ---------- PAGE ROUTING ---------- */
   function goTo(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + page).classList.add('active');
+    const targetPage = document.getElementById('page-' + page);
+    if (targetPage) targetPage.classList.add('active');
     document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.page === page));
     document.getElementById('navLinks').classList.remove('open');
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
     history.replaceState(null, '', '#' + page);
   }
+
   window.addEventListener('DOMContentLoaded', () => {
     const initial = (location.hash || '#home').replace('#', '');
     if (document.getElementById('page-' + initial)) goTo(initial); else goTo('home');
+    renderCalendar();
   });
 
-  /* ---------- GALLERY ----------
-     HOW TO ADD PHOTOS (works instantly for every visitor, from any device):
-     1. On github.com, open this repo, go into the "images" folder
-        (create it at the repo root, next to index.html, if it's not there yet).
-     2. Click "Add file" -> "Upload files", drag in your photo(s), and commit.
-        (Anyone added as a repo Collaborator can do this from their phone or laptop.)
-     3. That's it — no code editing needed. Every photo displays as a clean,
-        uniform square tile (cropped to fit) automatically — no manual resizing needed.
-     Empty slots below just show a placeholder ✦ until real photos are added.
-  ---------------------------------- */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
+
+  /* GALLERY */
   const GITHUB_USER = 'arnoldjaoko';
   const GITHUB_REPO = 'SetsByBryalla';
   const GITHUB_BRANCH = 'main';
@@ -429,49 +442,50 @@
   }
   renderGallery();
 
-  /* ---------- SERVICE MENU ---------- */
+  /* SERVICE MENU */
   const menuData = [
-    { name: 'Manicure', price: '$20', duration: '60m', url: 'https://cal.com/setsbybryalla/manicure-20' },
-    { name: 'Gel X Nails — Short', price: '$30', duration: '90m', url: 'https://cal.com/setsbybryalla/gel-x-nails-short-30' },
-    { name: 'Gel X Nails — Medium', price: '$40', duration: '90m', url: 'https://cal.com/setsbybryalla/gel-x-nails-medium-40' },
-    { name: 'Gel X Nails — Long', price: '$50', duration: '120m', url: 'https://cal.com/setsbybryalla/gel-x-nails-long-50' },
-    { name: 'Gel X Nails — XL+', price: '$65', duration: '120m', url: 'https://cal.com/setsbybryalla/gel-x-nails-xl-65' },
-    { name: 'Acrylic Nails — Overlay', price: '$30', duration: '60m', url: 'https://cal.com/setsbybryalla/acrylic-nails-overlay-30' },
-    { name: 'Acrylic Nails — Short', price: '$40', duration: '90m', url: 'https://cal.com/setsbybryalla/acrylic-nails-short-40' },
-    { name: 'Acrylic Nails — Medium', price: '$50', duration: '90m', url: 'https://cal.com/setsbybryalla/acrylic-nails-medium-50' },
-    { name: 'Acrylic Nails — Long', price: '$60', duration: '120m', url: 'https://cal.com/setsbybryalla/acrylic-nails-long-60' },
-    { name: 'Acrylic Nails — XL+', price: '$75', duration: '120m', url: 'https://cal.com/setsbybryalla/acrylic-nails-xl-75' }
+    { name: 'Manicure', price: '$20', duration: '60m' },
+    { name: 'Gel X Nails — Short', price: '$30', duration: '90m' },
+    { name: 'Gel X Nails — Medium', price: '$40', duration: '90m' },
+    { name: 'Gel X Nails — Long', price: '$50', duration: '120m' },
+    { name: 'Gel X Nails — XL+', price: '$65', duration: '120m' },
+    { name: 'Acrylic Nails — Overlay', price: '$30', duration: '60m' },
+    { name: 'Acrylic Nails — Short', price: '$40', duration: '90m' },
+    { name: 'Acrylic Nails — Medium', price: '$50', duration: '90m' },
+    { name: 'Acrylic Nails — Long', price: '$60', duration: '120m' },
+    { name: 'Acrylic Nails — XL+', price: '$75', duration: '120m' }
   ];
   function renderMenu() {
     const grid = document.getElementById('menuGrid');
     if (!grid) return;
     grid.innerHTML = '';
     menuData.forEach(m => {
-      const a = document.createElement('a');
-      a.className = 'menu-card';
-      a.href = m.url; a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = `
+      const card = document.createElement('div');
+      card.className = 'menu-card';
+      card.onclick = () => goTo('booking');
+      card.innerHTML = `
         <p class="menu-card-name">${m.name}</p>
         <div class="menu-card-meta">
           <span class="menu-card-price">${m.price}</span>
           <span class="menu-card-duration">${m.duration}</span>
         </div>
         <p class="menu-card-book">Book This Service →</p>`;
-      grid.appendChild(a);
+      grid.appendChild(card);
     });
   }
   renderMenu();
 
-  /* ---------- FAQ ---------- */
+  /* FAQ */
   const faqData = [
-    { q: 'How far in advance should I book?', a: 'Booking opens up to 4 months in advance, and slots go quickly during my available rotation weeks — I recommend booking as early as you can.' },
-    { q: 'Do you require a deposit?', a: 'No — there are no deposits, late fees, or no-show fees. Just please be respectful of the schedule and communicate any changes as early as possible.' },
-    { q: 'What forms of payment do you accept?', a: 'CashApp, Venmo, Zelle, Apple Cash, and physical cash. Payment is due at the start of your appointment, not the end, so please come prepared. Prices are firm — no negotiation.' },
-    { q: 'How should I prep my nails before my appointment?', a: 'Arrive with clean, product-free nails when possible. Send over your real prep instructions to replace this placeholder.' },
-    { q: 'What if I have more questions before booking?', a: 'Feel free to send a message on Instagram @bryallaroseman — happy to help before you book.' }
+    { q: 'How far in advance should I book?', a: 'Booking opens up to 60 days in advance, and slots go quickly during my available rotation weeks.' },
+    { q: 'Do you require a deposit?', a: 'No — there are no deposits, late fees, or no-show fees. Just please be respectful of the schedule.' },
+    { q: 'What forms of payment do you accept?', a: 'CashApp, Venmo, Zelle, Apple Cash, and physical cash. Payment is due at the start of your appointment.' },
+    { q: 'How should I prep my nails before my appointment?', a: 'Arrive with clean, product-free nails when possible.' },
+    { q: 'What if I have more questions before booking?', a: 'Feel free to send a message on Instagram @bryallaroseman.' }
   ];
   function renderFaq() {
     const list = document.getElementById('faqList');
+    if (!list) return;
     list.innerHTML = '';
     faqData.forEach((item, i) => {
       const el = document.createElement('div');
@@ -486,18 +500,19 @@
   }
   function toggleFaq(i) {
     const items = document.querySelectorAll('.faq-item');
-    items[i].classList.toggle('open');
+    if (items[i]) items[i].classList.toggle('open');
   }
   renderFaq();
 
-  /* ---------- TESTIMONIALS ---------- */
+  /* TESTIMONIALS */
   const testimonialData = [
     { quote: 'Bryalla is so talented and detail-oriented — my nails have never looked this good. 10/10', author: 'Placeholder Client', service: 'Full Set — Coffin' },
-    { quote: 'I get compliments every single time. She listens to exactly what I want and always delivers something even better.', author: 'Placeholder Client', service: 'Nail Art' },
-    { quote: 'Clean, professional, and always on time. This is the only place I trust with my nails now.', author: 'Placeholder Client', service: 'Fill' }
+    { quote: 'I get compliments every single time. She listens to exactly what I want.', author: 'Placeholder Client', service: 'Nail Art' },
+    { quote: 'Clean, professional, and always on time. This is the only place I trust.', author: 'Placeholder Client', service: 'Fill' }
   ];
   function renderTestimonials() {
     const grid = document.getElementById('testimonialsGrid');
+    if (!grid) return;
     grid.innerHTML = '';
     testimonialData.forEach(t => {
       const card = document.createElement('div');
@@ -511,203 +526,197 @@
     });
   }
   renderTestimonials();
- /* ---------- CUSTOM CALENDAR CONNECTED TO CLOUDFLARE WORKER ---------- */
-const WORKER_URL = 'https://setsbybryalla-api.setsbybryalla.workers.dev';
 
-let currentMonth = new Date().getMonth();
-let currentYear = new Date().getFullYear();
-let selectedDate = null;
-let selectedTime = null;
+  /* WORKER CALENDAR BACKEND */
+  const WORKER_URL = 'https://setsbybryalla-api.setsbybryalla.workers.dev';
 
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+  let selectedDate = null;
+  let selectedTime = null;
 
-function renderCalendar() {
-  const titleEl = document.getElementById('calMonthTitle');
-  const gridEl = document.getElementById('calGrid');
-  if (!titleEl || !gridEl) return;
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  titleEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
-  gridEl.innerHTML = '';
+  function renderCalendar() {
+    const titleEl = document.getElementById('calMonthTitle');
+    const gridEl = document.getElementById('calGrid');
+    if (!titleEl || !gridEl) return;
 
-  const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
-  const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const today = new Date();
+    titleEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    gridEl.innerHTML = '';
 
-  // Offset empty days
-  for (let i = 0; i < firstDayIndex; i++) {
-    const emptyCell = document.createElement('div');
-    emptyCell.className = 'cal-day empty';
-    gridEl.appendChild(emptyCell);
-  }
+    const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+    const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const today = new Date();
 
-  // Generate calendar days
-  for (let day = 1; day <= totalDays; day++) {
-    const dayCell = document.createElement('div');
-    dayCell.className = 'cal-day';
-    dayCell.textContent = day;
-
-    const thisDate = new Date(currentYear, currentMonth, day);
-    const isPast = thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const isToday = thisDate.toDateString() === today.toDateString();
-
-    if (isToday) dayCell.classList.add('today');
-
-    if (isPast) {
-      dayCell.classList.add('disabled');
-    } else {
-      dayCell.onclick = () => selectDate(currentYear, currentMonth, day);
-      if (selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === currentMonth && selectedDate.getFullYear() === currentYear) {
-        dayCell.classList.add('selected');
-      }
+    for (let i = 0; i < firstDayIndex; i++) {
+      const emptyCell = document.createElement('div');
+      emptyCell.className = 'cal-day empty';
+      gridEl.appendChild(emptyCell);
     }
-    gridEl.appendChild(dayCell);
+
+    for (let day = 1; day <= totalDays; day++) {
+      const dayCell = document.createElement('div');
+      dayCell.className = 'cal-day';
+      dayCell.textContent = day;
+
+      const thisDate = new Date(currentYear, currentMonth, day);
+      const isPast = thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const isToday = thisDate.toDateString() === today.toDateString();
+
+      if (isToday) dayCell.classList.add('today');
+
+      if (isPast) {
+        dayCell.classList.add('disabled');
+      } else {
+        dayCell.onclick = () => selectDate(currentYear, currentMonth, day);
+        if (selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === currentMonth && selectedDate.getFullYear() === currentYear) {
+          dayCell.classList.add('selected');
+        }
+      }
+      gridEl.appendChild(dayCell);
+    }
   }
-}
 
-function changeMonth(dir) {
-  currentMonth += dir;
-  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-  else if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-  renderCalendar();
-}
+  function changeMonth(dir) {
+    currentMonth += dir;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    else if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  }
 
-async function selectDate(year, month, day) {
-  selectedDate = new Date(year, month, day);
-  selectedTime = null;
-  renderCalendar();
-  
-  const container = document.getElementById('slotSelectionContainer');
-  const formattedDate = selectedDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-  
-  container.innerHTML = `<p style="font-size:0.7rem;color:var(--gold);margin-top:1rem;">Checking available slots...</p>`;
-  document.getElementById('bookingFormContainer').innerHTML = '';
-
-  try {
-    // Fetch live availability from your Cloudflare Worker
-    const res = await fetch(`${WORKER_URL}/api/availability?date=${formattedDate}`);
-    const data = await res.json();
+  async function selectDate(year, month, day) {
+    selectedDate = new Date(year, month, day);
+    selectedTime = null;
+    renderCalendar();
     
-    renderTimeSlots(data.slots || []);
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = `<p style="font-size:0.7rem;color:var(--text-muted);margin-top:1rem;">Could not load slots. Please try selecting another date.</p>`;
+    const container = document.getElementById('slotSelectionContainer');
+    const formattedDate = selectedDate.toISOString().split('T')[0];
+    
+    container.innerHTML = `<p style="font-size:0.7rem;color:var(--gold);margin-top:1rem;">Checking available slots...</p>`;
+    document.getElementById('bookingFormContainer').innerHTML = '';
+
+    try {
+      const res = await fetch(`${WORKER_URL}/api/availability?date=${formattedDate}`);
+      const data = await res.json();
+      renderTimeSlots(data.slots || []);
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = `<p style="font-size:0.7rem;color:var(--text-muted);margin-top:1rem;">Could not load slots. Please try another date.</p>`;
+    }
   }
-}
 
-function renderTimeSlots(slots) {
-  const container = document.getElementById('slotSelectionContainer');
-  const dateFormatted = selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+  function renderTimeSlots(slots) {
+    const container = document.getElementById('slotSelectionContainer');
+    const dateFormatted = selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
 
-  if (!slots || slots.length === 0) {
+    if (!slots || slots.length === 0) {
+      container.innerHTML = `
+        <div class="slot-selection-panel">
+          <p class="panel-title">No openings for ${dateFormatted}</p>
+        </div>`;
+      return;
+    }
+
+    let slotButtons = slots.map(slot => {
+      const timeLabel = new Date(slot.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return `<button class="slot-btn" type="button" onclick="selectTime('${slot.time}', '${timeLabel}', this)">${timeLabel}</button>`;
+    }).join('');
+
     container.innerHTML = `
       <div class="slot-selection-panel">
-        <p class="panel-title">No openings for ${dateFormatted}</p>
-      </div>`;
-    return;
+        <p class="panel-title">Available times for ${dateFormatted}</p>
+        <div class="slots-grid">${slotButtons}</div>
+      </div>
+    `;
   }
 
-  let slotButtons = slots.map(slot => {
-    const timeLabel = new Date(slot.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    return `<button class="slot-btn" type="button" onclick="selectTime('${slot.time}', '${timeLabel}', this)">${timeLabel}</button>`;
-  }).join('');
+  function selectTime(isoTime, displayTime, btn) {
+    document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedTime = isoTime;
+    renderBookingForm(displayTime);
+  }
 
-  container.innerHTML = `
-    <div class="slot-selection-panel">
-      <p class="panel-title">Available times for ${dateFormatted}</p>
-      <div class="slots-grid">${slotButtons}</div>
-    </div>
-  `;
-}
+  function renderBookingForm(displayTime) {
+    const container = document.getElementById('bookingFormContainer');
+    container.innerHTML = `
+      <div class="booking-user-form">
+        <p class="panel-title">Your Reservation Details</p>
+        <form onsubmit="handleBookingSubmit(event)">
+          <div class="form-group">
+            <label>Select Service</label>
+            <select class="form-select" id="bookingService" required>
+              <option value="Manicure — $20">Manicure — $20 (60m)</option>
+              <option value="Gel X Nails — Short — $30">Gel X Nails — Short — $30 (90m)</option>
+              <option value="Gel X Nails — Medium — $40">Gel X Nails — Medium — $40 (90m)</option>
+              <option value="Gel X Nails — Long — $50">Gel X Nails — Long — $50 (120m)</option>
+              <option value="Gel X Nails — XL+ — $65">Gel X Nails — XL+ — $65 (120m)</option>
+              <option value="Acrylic Nails — Overlay — $30">Acrylic Nails — Overlay — $30 (60m)</option>
+              <option value="Acrylic Nails — Short — $40">Acrylic Nails — Short — $40 (90m)</option>
+              <option value="Acrylic Nails — Medium — $50">Acrylic Nails — Medium — $50 (90m)</option>
+              <option value="Acrylic Nails — Long — $60">Acrylic Nails — Long — $60 (120m)</option>
+              <option value="Acrylic Nails — XL+ — $75">Acrylic Nails — XL+ — $75 (120m)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" class="form-input" id="clientName" placeholder="Jane Doe" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" class="form-input" id="clientEmail" placeholder="jane@example.com" required>
+          </div>
+          <div class="form-actions" style="margin-top:0.5rem">
+            <button type="submit" class="btn-primary" style="width:100%">Confirm Reservation for ${displayTime}</button>
+          </div>
+        </form>
+      </div>
+    `;
+  }
 
-function selectTime(isoTime, displayTime, btn) {
-  document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedTime = isoTime;
-  renderBookingForm(displayTime);
-}
+  async function handleBookingSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('clientName').value;
+    const email = document.getElementById('clientEmail').value;
+    const service = document.getElementById('bookingService').value;
 
-function renderBookingForm(displayTime) {
-  const container = document.getElementById('bookingFormContainer');
-  container.innerHTML = `
-    <div class="booking-user-form">
-      <p class="panel-title">Your Reservation Details</p>
-      <form onsubmit="handleBookingSubmit(event)">
-        <div class="form-group">
-          <label>Select Service</label>
-          <select class="form-select" id="bookingService" required>
-            <option value="Manicure — $20">Manicure — $20 (60m)</option>
-            <option value="Gel X Nails — Short — $30">Gel X Nails — Short — $30 (90m)</option>
-            <option value="Gel X Nails — Medium — $40">Gel X Nails — Medium — $40 (90m)</option>
-            <option value="Gel X Nails — Long — $50">Gel X Nails — Long — $50 (120m)</option>
-            <option value="Gel X Nails — XL+ — $65">Gel X Nails — XL+ — $65 (120m)</option>
-            <option value="Acrylic Nails — Overlay — $30">Acrylic Nails — Overlay — $30 (60m)</option>
-            <option value="Acrylic Nails — Short — $40">Acrylic Nails — Short — $40 (90m)</option>
-            <option value="Acrylic Nails — Medium — $50">Acrylic Nails — Medium — $50 (90m)</option>
-            <option value="Acrylic Nails — Long — $60">Acrylic Nails — Long — $60 (120m)</option>
-            <option value="Acrylic Nails — XL+ — $75">Acrylic Nails — XL+ — $75 (120m)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" class="form-input" id="clientName" placeholder="Jane Doe" required>
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" class="form-input" id="clientEmail" placeholder="jane@example.com" required>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-primary" style="width:100%">Confirm Reservation for ${displayTime}</button>
-        </div>
-      </form>
-    </div>
-  `;
-}
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.textContent = 'Reserving...';
+    submitBtn.disabled = true;
 
-async function handleBookingSubmit(e) {
-  e.preventDefault();
-  const name = document.getElementById('clientName').value;
-  const email = document.getElementById('clientEmail').value;
-  const service = document.getElementById('bookingService').value;
+    try {
+      const res = await fetch(`${WORKER_URL}/api/book`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          start: selectedTime,
+          responses: { name, email, notes: service }
+        })
+      });
 
-  const submitBtn = e.target.querySelector('button[type="submit"]');
-  submitBtn.textContent = 'Reserving...';
-  submitBtn.disabled = true;
+      const data = await res.json();
 
-  try {
-    // Send booking to your Cloudflare Worker
-    const res = await fetch(`${WORKER_URL}/api/book`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        start: selectedTime,
-        responses: { name, email, notes: service }
-      })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      showToast(`Appointment confirmed for ${name}!`);
-      selectedDate = null;
-      selectedTime = null;
-      document.getElementById('slotSelectionContainer').innerHTML = '';
-      document.getElementById('bookingFormContainer').innerHTML = '';
-      renderCalendar();
-    } else {
-      showToast(data.error || 'Booking failed. Please try again.');
+      if (res.ok) {
+        showToast(`Appointment confirmed for ${name}!`);
+        selectedDate = null;
+        selectedTime = null;
+        document.getElementById('slotSelectionContainer').innerHTML = '';
+        document.getElementById('bookingFormContainer').innerHTML = '';
+        renderCalendar();
+      } else {
+        showToast(data.error || 'Booking failed. Please try again.');
+        submitBtn.textContent = 'Confirm Reservation';
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      console.error(err);
+      showToast('Network error. Please try again.');
       submitBtn.textContent = 'Confirm Reservation';
       submitBtn.disabled = false;
     }
-  } catch (err) {
-    console.error(err);
-    showToast('Network error. Please try again.');
-    submitBtn.textContent = 'Confirm Reservation';
-    submitBtn.disabled = false;
   }
-}
-
-// Initialize calendar grid on page load
-renderCalendar();
 </script>
+
 </body>
 </html>
