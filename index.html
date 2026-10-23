@@ -827,9 +827,11 @@ const phoneInput = document.getElementById('clientPhone').value.trim();
 
 const phoneDigits = phoneInput.replace(/\D/g, '');
 
-if (!/^\d{10}$/.test(phoneNumber)) {
+
+if (phone.length !== 10) {
   showToast('Please enter exactly 10 digits for your phone number.');
   return;
+}
   }
  const paymentMethod = document.getElementById('paymentMethod').value;
  const additionalNotes = document.getElementById('additionalNotes').value.trim();
