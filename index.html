@@ -828,14 +828,9 @@ const phoneInput = document.getElementById('clientPhone').value.trim();
 
 const phoneDigits = phoneInput.replace(/\D/g, '');
 
-let phone = '';
-
-if (phoneDigits.length === 10) {
-  phone = phoneDigits;
- 
-} else {
-  showToast('Please enter a valid 10-digit US phone number.');
-    return;
+if (!/^\d{10}$/.test(phone)) {
+  showToast('Please enter exactly 10 digits for your phone number.');
+  return;
   }
 
   const submitBtn = e.target.querySelector('button[type="submit"]');
