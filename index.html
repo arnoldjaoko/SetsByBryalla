@@ -241,7 +241,7 @@
     <h2 class="section-title">Our <em>Signature</em> Services</h2>
     <div class="gold-line"></div>
     <div class="menu-grid" id="menuGrid"></div>
-    <p class="menu-note">Please make sure you've read and understood the description of your desired service before booking. Prices are firm — no negotiation. Tap any service to book it directly, or head to the <button style="background:none;border:none;color:var(--gold);cursor:pointer;font:inherit;text-decoration:underline;padding:0" onclick="goTo('booking')">Booking page</button> to see full availability.</p>
+    <p class="menu-note">Please make sure you've read and understood the description of your desired service before booking. Prices are firm — no negotiation. Tap any service to go to booking page directly, or head to the <button style="background:none;border:none;color:var(--gold);cursor:pointer;font:inherit;text-decoration:underline;padding:0" onclick="goTo('booking')">Booking page</button> to see full availability.</p>
   </section>
 
   <div class="teaser-strip">
@@ -281,7 +281,7 @@
       <div style="background:rgba(201,168,76,0.03);padding:2rem;border:0.5px solid rgba(201,168,76,0.15)">
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream);margin-bottom:0.5rem">Planning <em style="font-style:italic;color:var(--gold)">Ahead</em></p>
         <p style="font-size:0.7rem;color:var(--text-muted);line-height:1.8">
-          Booking is open up to 60 days in advance. Dates will automatically appear as "Available" or "Busy".
+          Booking is open up to 60 days in advance. Dates will automatically appear as "Available" or "No Appointments Currently Available".
         </p>
         <button class="btn-outline" style="margin-top:1.5rem;padding:0.8rem 1.8rem" onclick="goTo('booking')">Go to Booking</button>
       </div>
@@ -689,7 +689,7 @@ if (!res.ok) {
     if (!slots || slots.length === 0) {
       container.innerHTML = `
         <div class="slot-selection-panel">
-          <p class="panel-title">No openings for ${dateFormatted}</p>
+          <p class="panel-title">No Appointments Currently Available ${dateFormatted}</p>
         </div>`;
       return;
     }
