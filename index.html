@@ -821,8 +821,7 @@ async function handleBookingSubmit(e) {
   const name = document.getElementById('clientName').value.trim();
   const email = document.getElementById('clientEmail').value.trim();
   const service = document.getElementById('calendarService').value;
-  const paymentMethod = document.getElementById('paymentMethod').value;
-  const additionalNotes = document.getElementById('additionalNotes').value.trim();
+  
   
 const phoneInput = document.getElementById('clientPhone').value.trim();
 
@@ -832,6 +831,8 @@ if (!/^\d{10}$/.test(phone)) {
   showToast('Please enter exactly 10 digits for your phone number.');
   return;
   }
+ const paymentMethod = document.getElementById('paymentMethod').value;
+ const additionalNotes = document.getElementById('additionalNotes').value.trim();
 
   const submitBtn = e.target.querySelector('button[type="submit"]');
   const originalText = submitBtn.textContent;
