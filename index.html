@@ -79,7 +79,15 @@
   .service-desc { font-size: 0.72rem; line-height: 1.8; color: var(--text-muted); }
 
   /* SERVICE MENU */
-  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1px; margin-top: 3rem; background: rgba(201,168,76,0.2); border: 0.5px solid rgba(201,168,76,0.2); }
+  .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  background: rgba(201,168,76,0.2);
+  border: 0.5px solid rgba(201,168,76,0.2);
+}
   .menu-card { background: var(--charcoal); padding: 1.8rem 1.6rem; text-decoration: none; display: block; transition: background 0.3s; cursor: pointer; }
   .menu-card:hover { background: rgba(201,168,76,0.06); }
   .menu-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--cream); margin-bottom: 0.6rem; line-height: 1.3; }
